@@ -1,0 +1,18 @@
+[user]
+	name = Tuomas Mäkinen
+	email = 28858039+t4sm5n@users.noreply.github.com
+
+[core]
+	excludesfile = ~/.config/git/ignore
+
+[includeIf "gitdir:~/work/digione/"]
+	path = ~/work/digione/.gitconfig
+
+[url "git@github.com:"]
+	insteadOf = "https://github.com/"
+[github]
+	user = t4sm5n
+[push]
+	default = simple
+[credential]
+	helper = osxkeychain
