@@ -7,7 +7,7 @@ sudo softwareupdate --install-rosetta
 
 echo "moving dotfiles for chezmoi..."
 [[ -d ~/.local/share ]] || mkdir -p ~/.local/share
-[[ -L ~/.local/share/chezmoi ]] || ln -sf ~/.dotfiles ~/.local/share/chezmoi
+[[ -d ~/.local/share/chezmoi ]] || mv ~/.dotfiles ~/.local/share/chezmoi
 
 echo "setting up .Brewfile..."
 brew install chezmoi
