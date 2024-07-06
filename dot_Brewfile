@@ -1,10 +1,8 @@
 tap "homebrew/bundle"
 tap "homebrew/services"
-tap "ohueter/tap"
 
 brew "antidote"
 brew "asdf"
-brew "autokbisw", restart_service: :changed
 brew "chezmoi"
 brew "jq"
 brew "libpq"
