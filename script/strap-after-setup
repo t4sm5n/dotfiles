@@ -1,1 +1,6 @@
 chezmoi apply
+asdf plugin add java
+asdf plugin add kotlin
+asdf plugin add nodejs
+asdf plugin add python
+asdf plugin add quarkus
