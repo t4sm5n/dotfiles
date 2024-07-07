@@ -10,10 +10,10 @@ source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 antidote load
 
 {{ if eq .chezmoi.os "linux" -}}
-. "$HOME/.asdf/asdf.sh"
+source "$HOME/.asdf/asdf.sh"
 {{- else if eq .chezmoi.os "darwin" -}}
-. $(brew --prefix)/opt/asdf/libexec/asdf.sh
+source $(brew --prefix)/opt/asdf/libexec/asdf.sh
 {{- end }}
-. ~/.asdf/plugins/java/set-java-home.zsh
+source ~/.asdf/plugins/java/set-java-home.zsh
 
 eval "$(starship init zsh)"
