@@ -2,19 +2,57 @@
 set -euo pipefail
 set -vx
 
-echo "setting Dock settings..."
-defaults delete com.apple.dock persistent-apps
-defaults delete com.apple.dock persistent-others
+echo "setting macOS settings..."
+
+hostname="satonaka"
+sudo scutil --set ComputerName "$hostname"
+sudo scutil --set HostName "$hostname"
+sudo scutil --set LocalHostName "$hostname"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$hostname"
+
+sudo nvram SystemAudioVolume=" "
+
+defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
+
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+mkdir -p $HOME/Pictures/Screenshots
+defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screenshots"
+defaults write com.apple.screencapture type -string "png"
+defaults write com.apple.screencapture disable-shadow -bool true
+
+defaults write NSGlobalDomain AppleFontSmoothing -int 2
+
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+defaults write com.apple.finder ShowPathbar -bool true
+
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+defaults write com.apple.dock persistent-apps -array
+defaults write com.apple.dock persistent-others -array
 defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.dock autohide -int 1
-defaults write com.apple.dock minimize-to-application -int 1
+defaults write com.apple.dock minimize-to-application -bool true
 
 echo "installing Rosetta..."
 /usr/bin/pgrep -q oahd || sudo softwareupdate --install-rosetta
 
 echo "moving dotfiles for chezmoi..."
 [[ -d ~/.local/share ]] || mkdir -p ~/.local/share
-[[ -L ~/.local/share/chezmoi ]] || ln -sf ~/.dotfiles ~/.local/share/chezmoi
+[[ -d ~/.local/share/chezmoi ]] || cp -r ~/.dotfiles ~/.local/share/chezmoi
 
 echo "setting up .Brewfile..."
 brew install chezmoi
