@@ -2,12 +2,19 @@
 set -euo pipefail
 set -vx
 
+echo "setting Dock settings..."
+defaults delete com.apple.dock persistent-apps
+defaults delete com.apple.dock persistent-others
+defaults write com.apple.dock show-recents -bool false
+defaults write com.apple.dock autohide -int 1
+defaults write com.apple.dock minimize-to-application -int 1
+
 echo "installing Rosetta..."
 /usr/bin/pgrep -q oahd || sudo softwareupdate --install-rosetta
 
 echo "moving dotfiles for chezmoi..."
 [[ -d ~/.local/share ]] || mkdir -p ~/.local/share
-[[ -d ~/.local/share/chezmoi ]] || mv ~/.dotfiles ~/.local/share/chezmoi
+[[ -L ~/.local/share/chezmoi ]] || ln -sf ~/.dotfiles ~/.local/share/chezmoi
 
 echo "setting up .Brewfile..."
 brew install chezmoi
