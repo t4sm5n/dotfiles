@@ -4,15 +4,21 @@
 
 [core]
 	excludesfile = ~/.config/git/ignore
-
-[includeIf "gitdir:~/work/digione/"]
-	path = ~/work/digione/.gitconfig
+	pager = "if [ ! -z \"$(which diff-so-fancy)\" ]; then diff-so-fancy | less --tabs=4 -RFX; else less; fi"
 
 [url "git@github.com:"]
 	insteadOf = "https://github.com/"
+
 [github]
 	user = t4sm5n
+
 [push]
 	default = simple
+
+{{- if eq .chezmoi.os "darwin" -}}
 [credential]
 	helper = osxkeychain
+
+[includeIf "gitdir:~/work/digione/"]
+	path = ~/work/digione/.gitconfig
+{{- end -}}
