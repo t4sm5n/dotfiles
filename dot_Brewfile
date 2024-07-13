@@ -1,9 +1,9 @@
 tap "homebrew/bundle"
 tap "homebrew/services"
 
-brew "antidote"
 brew "asdf"
 brew "chezmoi"
+brew "fish"
 brew "jq"
 brew "libpq"
 brew "neovim"
