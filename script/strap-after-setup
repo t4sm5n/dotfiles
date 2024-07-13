@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 chezmoi apply
 
 asdf plugin add java
