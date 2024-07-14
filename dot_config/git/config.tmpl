@@ -6,6 +6,9 @@
 	excludesfile = ~/.config/git/ignore
 	pager = "if [ ! -z \"$(which diff-so-fancy)\" ]; then diff-so-fancy | less --tabs=4 -RFX; else less; fi"
 
+[interactive]
+	diffFilter = "if [ ! -z \"$(which diff-so-fancy)\" ]; then diff-so-fancy --patch; else less --tabs=4 -RFX; fi"
+
 [url "git@github.com:"]
 	insteadOf = "https://github.com/"
 

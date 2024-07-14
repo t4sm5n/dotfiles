@@ -3,6 +3,7 @@ tap "homebrew/services"
 
 brew "asdf"
 brew "chezmoi"
+brew "diff-so-fancy"
 brew "fish"
 brew "jq"
 brew "libpq"
