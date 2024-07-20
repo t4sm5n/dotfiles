@@ -18,10 +18,10 @@
 [push]
 	default = simple
 
-{{- if eq .chezmoi.os "darwin" -}}
+{{ if eq .chezmoi.os "darwin" -}}
 [credential]
 	helper = osxkeychain
 
 [includeIf "gitdir:~/work/digione/"]
 	path = ~/work/digione/.gitconfig
-{{- end -}}
+{{ end -}}

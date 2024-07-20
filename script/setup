@@ -3,6 +3,9 @@
 set -euo pipefail
 set -vx
 
+echo "installing Rosetta..."
+/usr/bin/pgrep -q oahd || sudo softwareupdate --install-rosetta --agree-to-license
+
 echo "setting macOS settings..."
 
 # hostname
@@ -15,20 +18,17 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 # disable startup sound
 sudo nvram SystemAudioVolume=" "
 
-
+# global settings
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
-
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
-
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
-
-defaults write com.apple.LaunchServices LSQuarantine -bool false
-
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write NSGlobalDomain AppleFontSmoothing -int 2
+
+# don't ask when opening new applications
+defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # screenshots
 mkdir -p $HOME/Pictures/Screenshots
@@ -36,26 +36,19 @@ defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screen
 defaults write com.apple.screencapture type -string "png"
 defaults write com.apple.screencapture disable-shadow -bool true
 
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
-
+# finder settings
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
 defaults write com.apple.finder ShowPathbar -bool true
-
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# dock
+# empty dock
 defaults write com.apple.dock persistent-apps -array
 defaults write com.apple.dock persistent-others -array
 defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.dock autohide -int 1
 defaults write com.apple.dock minimize-to-application -bool true
 killall Dock
-
-echo "installing Rosetta..."
-/usr/bin/pgrep -q oahd || sudo softwareupdate --install-rosetta --agree-to-license
 
 echo "moving dotfiles for chezmoi..."
 [[ -d ~/.local/share ]] || mkdir -p ~/.local/share
