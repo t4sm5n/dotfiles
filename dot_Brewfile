@@ -25,5 +25,5 @@ cask "scroll-reverser"
 cask "slack"
 cask "visual-studio-code"
 
-vscode "arcticicestudio.nord-visual-studio-code"
+vscode "jdinhlife.gruvbox"
 vscode "waderyan.gitblame"
