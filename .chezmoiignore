@@ -1,7 +1,5 @@
 {{ if ne .chezmoi.os "darwin" }}
 .Brewfile
 .config/fish/conf.d/brew.fish
-{{ else if eq .chezmoi.os "darwin" }}
-.config/fish/conf.d/asdf.fish
 {{ end }}
 script

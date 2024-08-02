@@ -1,5 +1,5 @@
-{{ if eq .chezmoi.os "darwin" }}
-#!/bin/bash
+{{ if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
 
 # dot_Brewfile hash: {{ include "dot_Brewfile" | sha256sum }}
 brew bundle --global --cleanup

@@ -1,0 +1,8 @@
+font_family Fira Code
+{{ if eq .chezmoi.os "darwin" -}}
+font_size 14.0
+{{- else -}}
+font_size 11.0
+{{- end }}
+
+include gruvbox-dark.conf
