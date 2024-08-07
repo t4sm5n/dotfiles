@@ -1,9 +1,9 @@
 [user]
-	name = Tuomas Mäkinen
-	email = 28858039+t4sm5n@users.noreply.github.com
+	name = {{ if hasKey . "name" }}{{ .name | quote }}{{ else }}"Tuomas Mäkinen"{{ end }}
+	email = {{ if hasKey . "email" }}{{ .email | quote }}{{ else }}"28858039+t4sm5n@users.noreply.github.com"{{ end }}
 
 [core]
-	excludesfile = ~/.config/git/ignore
+	excludesfile = "{{ .chezmoi.homeDir }}/.config/git/ignore"
 	pager = "if [ ! -z \"$(which diff-so-fancy)\" ]; then diff-so-fancy | less --tabs=4 -RFX; else less; fi"
 
 [interactive]
@@ -13,15 +13,7 @@
 	insteadOf = "https://github.com/"
 
 [github]
-	user = t4sm5n
+	user = {{ if hasKey .github "user" }}{{ .github.user | quote }}{{ else}}"t4sm5n"{{ end }}
 
 [push]
 	default = simple
-
-{{ if eq .chezmoi.os "darwin" -}}
-[credential]
-	helper = osxkeychain
-
-[includeIf "gitdir:~/work/digione/"]
-	path = ~/work/digione/.gitconfig
-{{ end -}}
